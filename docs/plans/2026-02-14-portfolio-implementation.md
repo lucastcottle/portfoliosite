@@ -1,0 +1,285 @@
+# Brutalist DevOps Portfolio - Implementation Plan
+
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+
+**Goal:** Create a minimal brutalist portfolio page with hero and 4 project cards
+
+**Architecture:** Single HTML file with embedded CSS, HTMX for interactivity. Brutalist styling with exposed borders, no border-radius, monochrome palette.
+
+**Tech Stack:** Plain HTML/CSS, HTMX (CDN), Google Fonts (JetBrains Mono, IBM Sans)
+
+---
+
+### Task 1: Create index.html with basic structure
+
+**Files:**
+- Create: `index.html`
+
+**Step 1: Write the HTML file**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+    <style>
+        :root {
+            --bg-dark: #1a1a1a;
+            --bg-card: #252525;
+            --border: #444;
+            --text-primary: #e5e5e5;
+            --text-heading: #ffffff;
+            --text-accent: #888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            color: var(--text-heading);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .hero .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            color: var(--text-accent);
+            margin-top: 1rem;
+        }
+
+        .hero .intro {
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin-top: 2rem;
+            color: var(--text-primary);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 4rem 0;
+        }
+
+        .projects h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--text-heading);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+        }
+
+        .project-card:hover .project-title,
+        .project-card:hover .project-desc,
+        .project-card:hover .project-tech {
+            color: var(--bg-dark);
+        }
+
+        .project-card:hover .project-tech {
+            border-color: var(--bg-dark);
+        }
+
+        .project-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-accent);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.5rem;
+            display: inline-block;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer a {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        footer a:hover {
+            color: var(--text-primary);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <section class="hero">
+            <h1>YOUR NAME</h1>
+            <p class="subtitle">DevOps Engineer</p>
+            <p class="intro">Building reliable infrastructure and automating everything in sight.</p>
+        </section>
+
+        <section class="projects">
+            <h2>PROJECTS</h2>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <h3 class="project-title">Kubernetes</h3>
+                    <p class="project-desc">Container orchestration at scale. K8s clusters, Helm charts, GitOps workflows.</p>
+                    <span class="project-tech">KUBERNETES</span>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="project-title">CI/CD</h3>
+                    <p class="project-desc">Pipeline automation for rapid, reliable deployments. GitHub Actions, Jenkins.</p>
+                    <span class="project-tech">GITHUB ACTIONS</span>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="project-title">Go</h3>
+                    <p class="project-desc">Custom tooling and CLI applications built for DevOps workflows.</p>
+                    <span class="project-tech">GOLANG</span>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="project-title">Observability/SRE</h3>
+                    <p class="project-desc">Monitoring, logging, and reliability engineering. SLIs, SLOs, and beyond.</p>
+                    <span class="project-tech">PROMETHEUS</span>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <a href="mailto:your.email@example.com">your.email@example.com</a>
+        </div>
+    </footer>
+</body>
+</html>
+```
+
+**Step 2: Verify file created**
+
+Run: `ls -la index.html`
+
+**Step 3: Open in browser to verify**
+
+Open `index.html` in browser or run local server.
+
+---
+
+### Task 2: Update with your actual information
+
+**Files:**
+- Modify: `index.html:89-93` (hero section)
+
+**Step 1: Replace YOUR NAME with your actual name**
+
+Edit the h1 element to contain your name.
+
+**Step 2: Update the intro text**
+
+Edit the intro paragraph to describe yourself.
+
+**Step 3: Update email in footer**
+
+Edit the mailto link with your actual email.
+
+---
+
+### Task 3: Verify implementation
+
+**Step 1: Check against design**
+
+- [ ] Hero displays name, title, intro
+- [ ] 4 project cards in grid layout
+- [ ] Brutalist styling (borders, no radius, monochrome)
+- [ ] JetBrains Mono and IBM Sans fonts loaded
+- [ ] Hover effects on cards
+- [ ] Responsive on mobile
+
+**Step 2: Validate HTML**
+
+Run: Check in browser for console errors
+
+---
+
+### Task 4: Commit
+
+Run:
+```bash
+git init
+git add index.html docs/plans/2026-02-14-portfolio-design.md
+git commit -m "feat: add brutalist DevOps portfolio"
+```
