@@ -26,8 +26,6 @@
 
         :root {
             --bg: #aaaaaa;
-            --bg-card: #bbbbbb;
-            --border: #666666;
             --text-primary: #1a1a1a;
             --text-heading: #1a1a1a;
             --text-accent: #444444;
@@ -53,7 +51,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            border-bottom: 1px solid var(--border);
             padding: 4rem 0;
         }
 
@@ -90,14 +87,12 @@
             font-weight: 700;
             color: var(--text-heading);
             margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
         }
 
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         @media (max-width: 768px) {
@@ -105,26 +100,9 @@
         }
 
         .project-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 1.5rem;
+            padding: 0;
             transition: all 0.2s ease;
             cursor: pointer;
-        }
-
-        .project-card:hover {
-            background: var(--text-primary);
-            color: var(--bg);
-        }
-
-        .project-card:hover .project-title,
-        .project-card:hover .project-desc,
-        .project-card:hover .project-tech {
-            color: var(--bg);
-        }
-
-        .project-card:hover .project-tech {
-            border-color: var(--bg);
         }
 
         .project-title {
@@ -132,26 +110,31 @@
             font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-heading);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .project-card:hover .project-title {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
         }
 
         .project-desc {
             font-size: 0.95rem;
             color: var(--text-primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .project-tech {
             font-family: 'CommitMono Nerd Font', monospace;
             font-size: 0.75rem;
             color: var(--text-accent);
-            border: 1px solid var(--border);
-            padding: 0.25rem 0.5rem;
-            display: inline-block;
         }
 
         .project-features {
-            margin-top: 1rem;
+            margin-top: 0.75rem;
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
@@ -161,19 +144,11 @@
             font-family: 'CommitMono Nerd Font', monospace;
             font-size: 0.7rem;
             color: var(--text-accent);
-            border: 1px solid var(--border);
-            padding: 0.2rem 0.4rem;
-        }
-
-        .project-card:hover .project-features span {
-            color: var(--bg);
-            border-color: var(--bg);
         }
 
         footer {
-            border-top: 1px solid var(--border);
             padding: 2rem 0;
-            text-align: center;
+            text-align: left;
         }
 
         footer a {
@@ -184,7 +159,6 @@
         }
 
         footer a:hover {
-            color: var(--text-primary);
             text-decoration: underline;
         }
     </style>
