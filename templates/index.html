@@ -91,12 +91,8 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .projects-grid { grid-template-columns: 1fr; }
+            grid-template-columns: 1fr;
+            row-gap: 1.5rem;
         }
 
         .project-card {
@@ -183,7 +179,7 @@
                 >
                     <h3 class="project-title">{{.Title}}</h3>
                     <p class="project-desc">{{.ShortDesc}}</p>
-                    <span class="project-tech">{{.Tech}}</span>
+                    <span class="project-tech">| {{.Tech}}</span>
                 </article>
                 {{end}}
             </div>
