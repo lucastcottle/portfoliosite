@@ -53,6 +53,9 @@ var projects = []Project{
 var tmpl = template.Must(template.ParseGlob("templates/*.html"))
 
 func main() {
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	http.HandleFunc("/", handleIndex)
 	http.HandleFunc("/projects/", handleProject)
 
