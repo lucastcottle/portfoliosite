@@ -82,22 +82,6 @@
             color: var(--border);
         }
 
-        .separator {
-            padding: 2rem 0;
-            margin: 2rem 0;
-        }
-
-        .ascii-line {
-            font-family: 'CommitMono Nerd Font', monospace;
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: var(--text-accent);
-            letter-spacing: -0.05em;
-            text-align: center;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
         .experience {
             padding: 4rem 0;
         }
@@ -119,12 +103,14 @@
         }
 
         .timeline-entry {
-            transition: background-color 0.2s ease;
-            padding: 1rem 0;
+            transition: all 0.2s ease;
+            padding: 0.5rem 0;
         }
 
-        .timeline-entry:hover {
-            background-color: #b0b0b0;
+        .timeline-entry:hover .timeline-company {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
         }
 
         .timeline-company {
@@ -170,8 +156,8 @@
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 900px;
+            margin: 0;
             padding: 0 2rem;
         }
 
@@ -216,6 +202,8 @@
             font-weight: 700;
             color: var(--text-heading);
             margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
         }
 
         .projects-grid {
@@ -307,12 +295,6 @@
             <p class="intro">Building reliable infrastructure and automating everything in sight.</p>
         </section>
 
-        <div class="separator">
-            <div class="container">
-                <div class="ascii-line">================================================================================</div>
-            </div>
-        </div>
-
         <section class="experience" id="experience">
             <div class="container">
                 <h2 class="section-title">EXPERIENCE</h2>
@@ -341,12 +323,6 @@
                 </div>
             </div>
         </section>
-
-        <div class="separator">
-            <div class="container">
-                <div class="ascii-line">================================================================================</div>
-            </div>
-        </div>
 
         <section class="projects" id="projects">
             <h2 id="projects-title">PROJECTS</h2>
