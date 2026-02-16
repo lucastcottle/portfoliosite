@@ -3,9 +3,6 @@ FROM golang:1.25.4 AS build
 
 WORKDIR /go/src/app
 
-COPY go.mod ./
-RUN go mod download
-
 COPY . .
 RUN CGO_ENABLED=0 go build -o /go/bin/app
 
@@ -16,4 +13,4 @@ COPY --from=build /go/src/app/static /app/static
 COPY --from=build /go/src/app/templates /app/templates
 
 WORKDIR /app
-CMD ["/app/portfolio"] 
+CMD ["/app/portfolio"]
