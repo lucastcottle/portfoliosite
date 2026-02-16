@@ -1,4 +1,4 @@
-F#build
+#build
 FROM golang:1.25.4 AS build
 
 WORKDIR /go/src/app
