@@ -16,4 +16,4 @@ COPY --from=build /go/src/app/static /app/static
 COPY --from=build /go/src/app/templates /app/templates
 
 WORKDIR /app
-CMD ["-port","8080","-https-promote", "-enable-logging"]
+CMD ["/app/portfolio"] 
