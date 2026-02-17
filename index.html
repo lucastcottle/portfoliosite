@@ -8,18 +8,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'Commit Mono';
+            src: url('fonts/CommitMono-400-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Commit Mono';
+            src: url('fonts/CommitMono-700-Regular.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
         :root {
             --bg: #aaaaaa;
             --text-primary: #1a1a1a;
             --text-heading: #1a1a1a;
             --text-accent: #444444;
-            --border: #444444;
+            --border: #1a1a1a;
+            --border-width: 4px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'IBM Plex Sans', 'Courier New', monospace;
+            font-family: 'Commit Mono', 'Courier New', monospace;
             background-color: var(--bg);
             color: var(--text-primary);
             line-height: 1.6;
@@ -34,15 +48,15 @@
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
             background-color: var(--bg);
-            border-bottom: 1px solid var(--border);
+            border-bottom: var(--border-width) solid var(--border);
             padding: 1rem 2rem;
             z-index: 100;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
+            font-family: 'Commit Mono', 'Courier New', monospace;
+            font-weight: 700;
             font-size: 0.875rem;
             width: 100%;
-            max-width: 900px;
             display: flex;
             align-items: center;
             gap: 2rem;
@@ -76,7 +90,7 @@
             color: var(--text-heading);
             margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
+            border-bottom: var(--border-width) solid var(--border);
         }
 
         .timeline {
@@ -105,15 +119,15 @@
         }
 
         .timeline-role {
-            font-family: 'Courier New', monospace;
+            font-family: 'Commit Mono', monospace;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
 
         .timeline-period {
-            font-family: 'Courier New', monospace;
+            font-family: 'Commit Mono', monospace;
             font-size: 0.875rem;
             font-weight: normal;
             color: var(--text-accent);
@@ -139,9 +153,31 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 100%;
             margin: 0;
             padding: 0 2rem;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+            }
+
+            .left-column {
+                padding-right: 3rem;
+                border-right: var(--border-width) solid var(--border);
+            }
+
+            .right-column {
+                padding-left: 3rem;
+            }
         }
 
         .hero {
@@ -162,7 +198,7 @@
         }
 
         .hero .subtitle {
-            font-family: 'Courier New', monospace;
+            font-family: 'Commit Mono', monospace;
             font-size: 1.25rem;
             color: var(--text-accent);
             margin-top: 1rem;
@@ -186,7 +222,7 @@
             color: var(--text-heading);
             margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
+            border-bottom: var(--border-width) solid var(--border);
         }
 
         .projects-grid {
@@ -223,7 +259,7 @@
         }
 
         .project-tech {
-            font-family: 'Courier New', monospace;
+            font-family: 'Commit Mono', monospace;
             font-size: 0.75rem;
             color: var(--text-accent);
         }
@@ -236,7 +272,7 @@
         }
 
         .project-features span {
-            font-family: 'Courier New', monospace;
+            font-family: 'Commit Mono', monospace;
             font-size: 0.7rem;
             color: var(--text-accent);
         }
@@ -247,7 +283,7 @@
         }
 
         footer a {
-            font-family: 'Courier New', monospace;
+            font-family: 'Commit Mono', monospace;
             color: var(--text-accent);
             text-decoration: none;
             font-size: 0.875rem;
@@ -269,95 +305,101 @@
         <a href="#contact" class="nav-link">Contact</a>
     </nav>
     <main class="container">
-        <section class="hero" id="hero">
-            <h1>LUCAS COTTLE</h1>
-            <p class="subtitle">DevOps Engineer</p>
-            <p class="intro">Building reliable infrastructure and automating everything in sight.</p>
-        </section>
+        <div class="main-content">
+            <div class="left-column">
+                <section class="hero" id="hero">
+                    <h1>LUCAS COTTLE</h1>
+                    <p class="subtitle">DevOps Engineer</p>
+                    <p class="intro">Building reliable infrastructure and automating everything in sight.</p>
+                </section>
 
-        <section class="experience" id="experience">
-            <h2 class="section-title">EXPERIENCE</h2>
-            
-            <div class="timeline">
-                <div class="timeline-entry">
-                    <h3 class="timeline-company">Tech Corp</h3>
-                    <p class="timeline-role">Senior DevOps Engineer</p>
-                    <p class="timeline-period">2022 - 2024 | San Francisco, CA</p>
-                    <p class="timeline-desc">Kubernetes orchestration, CI/CD pipelines, infrastructure as code</p>
-                </div>
-                
-                <div class="timeline-entry">
-                    <h3 class="timeline-company">Dev Solutions Inc</h3>
-                    <p class="timeline-role">DevOps Lead</p>
-                    <p class="timeline-period">2019 - 2022 | Remote</p>
-                    <p class="timeline-desc">AWS infrastructure, Docker containerization, monitoring systems</p>
-                </div>
-                
-                <div class="timeline-entry">
-                    <h3 class="timeline-company">StartupXYZ</h3>
-                    <p class="timeline-role">Systems Administrator</p>
-                    <p class="timeline-period">2017 - 2019 | Austin, TX</p>
-                    <p class="timeline-desc">Linux server management, shell scripting, network configuration</p>
-                </div>
+                <section class="experience" id="experience">
+                    <h2 class="section-title">EXPERIENCE</h2>
+                    
+                    <div class="timeline">
+                        <div class="timeline-entry">
+                            <h3 class="timeline-company">Tech Corp</h3>
+                            <p class="timeline-role">Senior DevOps Engineer</p>
+                            <p class="timeline-period">2022 - 2024 | San Francisco, CA</p>
+                            <p class="timeline-desc">Kubernetes orchestration, CI/CD pipelines, infrastructure as code</p>
+                        </div>
+                        
+                        <div class="timeline-entry">
+                            <h3 class="timeline-company">Dev Solutions Inc</h3>
+                            <p class="timeline-role">DevOps Lead</p>
+                            <p class="timeline-period">2019 - 2022 | Remote</p>
+                            <p class="timeline-desc">AWS infrastructure, Docker containerization, monitoring systems</p>
+                        </div>
+                        
+                        <div class="timeline-entry">
+                            <h3 class="timeline-company">StartupXYZ</h3>
+                            <p class="timeline-role">Systems Administrator</p>
+                            <p class="timeline-period">2017 - 2019 | Austin, TX</p>
+                            <p class="timeline-desc">Linux server management, shell scripting, network configuration</p>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </section>
 
-        <section class="projects" id="projects">
-            <h2>PROJECTS</h2>
-            <div class="projects-grid">
-                <article class="project-card">
-                    <h3 class="project-title">Kubernetes</h3>
-                    <p class="project-desc">Container orchestration at scale. K8s clusters, Helm charts, GitOps workflows.</p>
-                    <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">Production-grade Kubernetes infrastructure with automated deployments, GitOps workflows using ArgoCD, and comprehensive Helm chart library for reusable deployments.</p>
-                    <span class="project-tech">| KUBERNETES</span>
-                    <div class="project-features">
-                        <span>EKS/GKE clusters</span>
-                        <span>Helm charts</span>
-                        <span>ArgoCD GitOps</span>
-                        <span>Terraform IaC</span>
-                    </div>
-                </article>
+            <div class="right-column">
+                <section class="projects" id="projects">
+                    <h2>PROJECTS</h2>
+                    <div class="projects-grid">
+                        <article class="project-card">
+                            <h3 class="project-title">Kubernetes</h3>
+                            <p class="project-desc">Container orchestration at scale. K8s clusters, Helm charts, GitOps workflows.</p>
+                            <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">Production-grade Kubernetes infrastructure with automated deployments, GitOps workflows using ArgoCD, and comprehensive Helm chart library for reusable deployments.</p>
+                            <span class="project-tech">| KUBERNETES</span>
+                            <div class="project-features">
+                                <span>EKS/GKE clusters</span>
+                                <span>Helm charts</span>
+                                <span>ArgoCD GitOps</span>
+                                <span>Terraform IaC</span>
+                            </div>
+                        </article>
 
-                <article class="project-card">
-                    <h3 class="project-title">CI/CD</h3>
-                    <p class="project-desc">Pipeline automation for rapid, reliable deployments. GitHub Actions, Jenkins.</p>
-                    <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">End-to-end CI/CD pipelines with automated testing, security scanning, and multi-environment deployments with rollback capabilities.</p>
-                    <span class="project-tech">| GITHUB ACTIONS</span>
-                    <div class="project-features">
-                        <span>GitHub Actions</span>
-                        <span>Jenkins pipelines</span>
-                        <span>Security scanning</span>
-                        <span>Blue-green deploys</span>
-                    </div>
-                </article>
+                        <article class="project-card">
+                            <h3 class="project-title">CI/CD</h3>
+                            <p class="project-desc">Pipeline automation for rapid, reliable deployments. GitHub Actions, Jenkins.</p>
+                            <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">End-to-end CI/CD pipelines with automated testing, security scanning, and multi-environment deployments with rollback capabilities.</p>
+                            <span class="project-tech">| GITHUB ACTIONS</span>
+                            <div class="project-features">
+                                <span>GitHub Actions</span>
+                                <span>Jenkins pipelines</span>
+                                <span>Security scanning</span>
+                                <span>Blue-green deploys</span>
+                            </div>
+                        </article>
 
-                <article class="project-card">
-                    <h3 class="project-title">Go</h3>
-                    <p class="project-desc">Custom tooling and CLI applications built for DevOps workflows.</p>
-                    <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">Custom Go applications including CLI tools for infrastructure management, automation scripts, and internal developer platforms.</p>
-                    <span class="project-tech">| GOLANG</span>
-                    <div class="project-features">
-                        <span>CLI tools</span>
-                        <span>Infrastructure APIs</span>
-                        <span>Automation</span>
-                        <span>Custom operators</span>
-                    </div>
-                </article>
+                        <article class="project-card">
+                            <h3 class="project-title">Go</h3>
+                            <p class="project-desc">Custom tooling and CLI applications built for DevOps workflows.</p>
+                            <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">Custom Go applications including CLI tools for infrastructure management, automation scripts, and internal developer platforms.</p>
+                            <span class="project-tech">| GOLANG</span>
+                            <div class="project-features">
+                                <span>CLI tools</span>
+                                <span>Infrastructure APIs</span>
+                                <span>Automation</span>
+                                <span>Custom operators</span>
+                            </div>
+                        </article>
 
-                <article class="project-card">
-                    <h3 class="project-title">Observability/SRE</h3>
-                    <p class="project-desc">Monitoring, logging, and reliability engineering. SLIs, SLOs, and beyond.</p>
-                    <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">Comprehensive observability stack with Prometheus metrics, Loki logging, Grafana dashboards, and SLO-based alerting for production systems.</p>
-                    <span class="project-tech">| PROMETHEUS</span>
-                    <div class="project-features">
-                        <span>Prometheus/Grafana</span>
-                        <span>Loki logging</span>
-                        <span>SLO tracking</span>
-                        <span>Incident response</span>
+                        <article class="project-card">
+                            <h3 class="project-title">Observability/SRE</h3>
+                            <p class="project-desc">Monitoring, logging, and reliability engineering. SLIs, SLOs, and beyond.</p>
+                            <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">Comprehensive observability stack with Prometheus metrics, Loki logging, Grafana dashboards, and SLO-based alerting for production systems.</p>
+                            <span class="project-tech">| PROMETHEUS</span>
+                            <div class="project-features">
+                                <span>Prometheus/Grafana</span>
+                                <span>Loki logging</span>
+                                <span>SLO tracking</span>
+                                <span>Incident response</span>
+                            </div>
+                        </article>
                     </div>
-                </article>
+                </section>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer id="contact">
