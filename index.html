@@ -6,49 +6,154 @@
     <title>DevOps Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #1a1a1a;
-            --bg-card: #252525;
-            --border: #444;
-            --text-primary: #e5e5e5;
-            --text-heading: #ffffff;
-            --text-accent: #888;
+            --bg: #aaaaaa;
+            --text-primary: #1a1a1a;
+            --text-heading: #1a1a1a;
+            --text-accent: #444444;
+            --border: #444444;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'IBM Sans', sans-serif;
-            background-color: var(--bg-dark);
+            font-family: 'IBM Plex Sans', 'Courier New', monospace;
+            background-color: var(--bg);
             color: var(--text-primary);
             line-height: 1.6;
+            padding-top: 60px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 100;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.875rem;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        .nav-separator {
+            color: var(--border);
+        }
+
+        .experience {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .timeline-entry {
+            transition: all 0.2s ease;
+            padding: 0.5rem 0;
+        }
+
+        .timeline-entry:hover .timeline-company {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        .timeline-company {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-role {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-period {
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            font-weight: normal;
+            color: var(--text-accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar .container {
+                gap: 1rem;
+                font-size: 0.75rem;
+            }
+            
+            .nav-separator {
+                display: none;
+            }
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 900px;
+            margin: 0;
             padding: 0 2rem;
         }
 
-        /* Hero Section */
         .hero {
             min-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            border-bottom: 1px solid var(--border);
             padding: 4rem 0;
         }
 
         .hero h1 {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 700;
             color: var(--text-heading);
@@ -57,7 +162,7 @@
         }
 
         .hero .subtitle {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Courier New', monospace;
             font-size: 1.25rem;
             color: var(--text-accent);
             margin-top: 1rem;
@@ -70,14 +175,14 @@
             color: var(--text-primary);
         }
 
-        /* Projects Section */
         .projects {
             padding: 4rem 0;
         }
 
         .projects h2 {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 1.5rem;
+            font-weight: 700;
             color: var(--text-heading);
             margin-bottom: 2rem;
             padding-bottom: 1rem;
@@ -85,122 +190,177 @@
         }
 
         .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
+            flex-direction: column;
             gap: 1.5rem;
         }
 
-        @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         .project-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 1.5rem;
+            padding: 0;
             transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            background: var(--text-primary);
-            color: var(--bg-dark);
-        }
-
-        .project-card:hover .project-title,
-        .project-card:hover .project-desc,
-        .project-card:hover .project-tech {
-            color: var(--bg-dark);
-        }
-
-        .project-card:hover .project-tech {
-            border-color: var(--bg-dark);
         }
 
         .project-title {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-heading);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .project-card:hover .project-title {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
         }
 
         .project-desc {
             font-size: 0.95rem;
             color: var(--text-primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .project-tech {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Courier New', monospace;
             font-size: 0.75rem;
             color: var(--text-accent);
-            border: 1px solid var(--border);
-            padding: 0.25rem 0.5rem;
-            display: inline-block;
         }
 
-        /* Footer */
+        .project-features {
+            margin-top: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-features span {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: var(--text-accent);
+        }
+
         footer {
-            border-top: 1px solid var(--border);
             padding: 2rem 0;
-            text-align: center;
+            text-align: left;
         }
 
         footer a {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Courier New', monospace;
             color: var(--text-accent);
             text-decoration: none;
             font-size: 0.875rem;
         }
 
         footer a:hover {
-            color: var(--text-primary);
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
+    <nav class="nav-bar">
+        <a href="#hero" class="nav-link">About</a>
+        <span class="nav-separator">|</span>
+        <a href="#experience" class="nav-link">Experience</a>
+        <span class="nav-separator">|</span>
+        <a href="#projects" class="nav-link">Projects</a>
+        <span class="nav-separator">|</span>
+        <a href="#contact" class="nav-link">Contact</a>
+    </nav>
     <main class="container">
-        <section class="hero">
+        <section class="hero" id="hero">
             <h1>LUCAS COTTLE</h1>
             <p class="subtitle">DevOps Engineer</p>
             <p class="intro">Building reliable infrastructure and automating everything in sight.</p>
         </section>
 
-        <section class="projects">
+        <section class="experience" id="experience">
+            <h2 class="section-title">EXPERIENCE</h2>
+            
+            <div class="timeline">
+                <div class="timeline-entry">
+                    <h3 class="timeline-company">Tech Corp</h3>
+                    <p class="timeline-role">Senior DevOps Engineer</p>
+                    <p class="timeline-period">2022 - 2024 | San Francisco, CA</p>
+                    <p class="timeline-desc">Kubernetes orchestration, CI/CD pipelines, infrastructure as code</p>
+                </div>
+                
+                <div class="timeline-entry">
+                    <h3 class="timeline-company">Dev Solutions Inc</h3>
+                    <p class="timeline-role">DevOps Lead</p>
+                    <p class="timeline-period">2019 - 2022 | Remote</p>
+                    <p class="timeline-desc">AWS infrastructure, Docker containerization, monitoring systems</p>
+                </div>
+                
+                <div class="timeline-entry">
+                    <h3 class="timeline-company">StartupXYZ</h3>
+                    <p class="timeline-role">Systems Administrator</p>
+                    <p class="timeline-period">2017 - 2019 | Austin, TX</p>
+                    <p class="timeline-desc">Linux server management, shell scripting, network configuration</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects" id="projects">
             <h2>PROJECTS</h2>
             <div class="projects-grid">
                 <article class="project-card">
                     <h3 class="project-title">Kubernetes</h3>
                     <p class="project-desc">Container orchestration at scale. K8s clusters, Helm charts, GitOps workflows.</p>
-                    <span class="project-tech">KUBERNETES</span>
+                    <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">Production-grade Kubernetes infrastructure with automated deployments, GitOps workflows using ArgoCD, and comprehensive Helm chart library for reusable deployments.</p>
+                    <span class="project-tech">| KUBERNETES</span>
+                    <div class="project-features">
+                        <span>EKS/GKE clusters</span>
+                        <span>Helm charts</span>
+                        <span>ArgoCD GitOps</span>
+                        <span>Terraform IaC</span>
+                    </div>
                 </article>
 
                 <article class="project-card">
                     <h3 class="project-title">CI/CD</h3>
                     <p class="project-desc">Pipeline automation for rapid, reliable deployments. GitHub Actions, Jenkins.</p>
-                    <span class="project-tech">GITHUB ACTIONS</span>
+                    <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">End-to-end CI/CD pipelines with automated testing, security scanning, and multi-environment deployments with rollback capabilities.</p>
+                    <span class="project-tech">| GITHUB ACTIONS</span>
+                    <div class="project-features">
+                        <span>GitHub Actions</span>
+                        <span>Jenkins pipelines</span>
+                        <span>Security scanning</span>
+                        <span>Blue-green deploys</span>
+                    </div>
                 </article>
 
                 <article class="project-card">
                     <h3 class="project-title">Go</h3>
                     <p class="project-desc">Custom tooling and CLI applications built for DevOps workflows.</p>
-                    <span class="project-tech">GOLANG</span>
+                    <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">Custom Go applications including CLI tools for infrastructure management, automation scripts, and internal developer platforms.</p>
+                    <span class="project-tech">| GOLANG</span>
+                    <div class="project-features">
+                        <span>CLI tools</span>
+                        <span>Infrastructure APIs</span>
+                        <span>Automation</span>
+                        <span>Custom operators</span>
+                    </div>
                 </article>
 
                 <article class="project-card">
                     <h3 class="project-title">Observability/SRE</h3>
                     <p class="project-desc">Monitoring, logging, and reliability engineering. SLIs, SLOs, and beyond.</p>
-                    <span class="project-tech">PROMETHEUS</span>
+                    <p class="project-desc" style="margin-top: 0.5rem; color: var(--text-accent);">Comprehensive observability stack with Prometheus metrics, Loki logging, Grafana dashboards, and SLO-based alerting for production systems.</p>
+                    <span class="project-tech">| PROMETHEUS</span>
+                    <div class="project-features">
+                        <span>Prometheus/Grafana</span>
+                        <span>Loki logging</span>
+                        <span>SLO tracking</span>
+                        <span>Incident response</span>
+                    </div>
                 </article>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer id="contact">
         <div class="container">
             <a href="mailto:lucas.t.cottle@gmail.com">lucas.t.cottle@gmail.com</a>
         </div>
